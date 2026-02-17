@@ -36,6 +36,24 @@ selecting the position number. See board below.
         }
     }
 
+    static void takeTurn(char[] tttb, char player) {
+        int p;
+        while (true) {
+            System.out.print("Player " + player + ", choose a position: ");
+            p = kb.nextInt();
+            if (!(p >= 1 && p <= 9)) {
+                System.out.println("\nYou're selection must be in the range 1-9.\n");
+                continue;
+            }
+            if (!(tttb[p - 1] == ' ')) {
+                System.out.println("\nPosition " + p + " is occupied by " + tttb[p - 1] + ".\n");
+                continue;
+            }
+            break;
+        }
+        tttb[p - 1] = player;
+    }
+
     static void main() {
         char[] ttt = {
                 ' ', ' ', ' ',
@@ -49,22 +67,9 @@ selecting the position number. See board below.
         while (! haveWinner) {
             // process player 1 turn
             printBoard(ttt);
-            int p;
-            while (true) {
-                System.out.print("Player 1, choose a position: ");
-                p = kb.nextInt();
-                if (!(p >= 1 && p <= 9)) {
-                    System.out.println("\nYou're selection must be in the range 1-9.\n");
-                    continue;
-                }
-                if (!(ttt[p - 1] == ' ')) {
-                    System.out.println("\nPosition " + p + " is occupied by " + ttt[p - 1] + ".\n");
-                    continue;
-                }
-                break;
-            }
-            ttt[p - 1] = 'X';
+            takeTurn(ttt, 'X');
 
+/*
             // test for winner in row
             char winner;
             for (int r = 0 ; r < 3; r++) {
@@ -83,22 +88,16 @@ selecting the position number. See board below.
                 }
             }
 
+            // diagonals
+            if (ttt[0] == ttt[4] && ttt[4] == ttt[8])
+                winner = ttt[0];
+            if (ttt[2] == ttt[4] && ttt[4] == ttt[6])
+                winner = ttt[2];
+
+            */
             // process player 2 turn
             printBoard(ttt);
-            while (true) {
-                System.out.print("Player 2, choose a position: ");
-                p = kb.nextInt();
-                if (!(p >= 1 && p <= 9)) {
-                    System.out.println("\nYou're selection must be in the range 1-9.\n");
-                    continue;
-                }
-                if (!(ttt[p - 1] == ' ')) {
-                    System.out.println("\nPosition " + p + " is occupied by " + ttt[p - 1] + ".\n");
-                    continue;
-                }
-                break;
-            }
-            ttt[p - 1] = 'O';
+           takeTurn(ttt, 'O');
         }
     }
 }
