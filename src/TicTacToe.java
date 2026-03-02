@@ -78,7 +78,7 @@ public class TicTacToe {
         return ' ';
     }
 
-    static void main() {
+    public static void main(String[] args) {
         char[] ttt = {
                 ' ', ' ', ' ',
                 ' ', ' ', ' ',
@@ -111,5 +111,6 @@ public class TicTacToe {
             System.out.println("\nCongratulations! '" + winner + "' has won!\n");
         else
             System.out.println("\nThe game was a draw!\n");
+        printBoard(ttt);
     }
 }
